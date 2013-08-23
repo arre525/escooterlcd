@@ -93,9 +93,10 @@ int main(void) {
 		} else {
 			usnprintf(LCDbuffer+10,16,"W                   ");
 		}
-		// Assuming it will never be colder than -9 degrees, otherwise we overwrite the last digit:)
-		usnprintf(LCDbuffer + 12,16,"%d                 ",temperature);
-		usnprintf(LCDbuffer + 14,16," C                    ");
+
+
+		usnprintf(LCDbuffer + 12,16,"%d                 ",voltage);
+		usnprintf(LCDbuffer + 14,16," V                    ");
 		LCDWriteText(LCDbuffer, 1, 0);
 
 		i++;
@@ -114,7 +115,12 @@ int main(void) {
 			usnprintf(LCDbuffer+8,16,"%d SWh             ",(smilljoule/(1000*3600)));  // not relevant if not calculated correctly!
 			LCDWriteText(LCDbuffer, 0, 0);
 			usnprintf(LCDbuffer,18,"%d sps                    ",(interrupts_per_second_adc));
+
+			/*
 			usnprintf(LCDbuffer+10,16,"PF:%d               ",powerfactor); // not relevant if not calculated correctly!
+			*/
+			usnprintf(LCDbuffer + 12,16,"%d                 ",temperature);
+			usnprintf(LCDbuffer + 14,16," C                    ");
 
 			LCDWriteText(LCDbuffer, 1, 0);
 			SysCtlDelay(CLKFREQ/9);
